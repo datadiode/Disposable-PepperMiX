@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Wine wants a display to create windows
+Xvfb $DISPLAY -ac -screen 0 1024x768x24 &
+
+sudo apt-get install -y winehq-stable
+sudo apt-get install -y wine-stable wine-stable-i386
+
 # Set presentation mode as configured in Vagrantfile
 xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -s $PRESENTATION_MODE -n -t bool
 
@@ -20,11 +26,11 @@ echo "en_US" > .config/user-dirs.locale
 xdg-user-dirs-update --force
 xdg-user-dirs-gtk-update --force
 
-# Wine wants a display to create windows
-Xvfb $DISPLAY -ac -screen 0 1024x768x24 &
-
 # Prepare wineprefix
-wine wineboot
+mkdir -p .cache/wine
+wget -NP .cache/wine/ https://github.com/wine-mono/wine-mono/releases/download/wine-mono-10.4.1/wine-mono-10.4.1-x86.msi
+
+winecfg /v win10
 winetricks --unattended $WINETRICKS_VERBS
 
 wget $YSETUP -O ysetup.exe
