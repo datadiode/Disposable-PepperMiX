@@ -26,6 +26,7 @@ chmod +x /usr/bin/winetricks
 if $AUTO_LOGIN; then
   crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-user vagrant
   crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-user-timeout 0
+  crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-in-background true
 fi
 
 # Disable session saving
