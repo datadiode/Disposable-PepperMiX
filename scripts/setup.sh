@@ -25,7 +25,7 @@ chmod +x /usr/bin/winetricks
 # Enable auto login
 if $AUTO_LOGIN; then
   crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-user vagrant
-  crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-user-timeout 0
+  crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-user-timeout 1
   crudini --set /etc/lightdm/lightdm.conf "Seat:*" autologin-in-background true
 fi
 
